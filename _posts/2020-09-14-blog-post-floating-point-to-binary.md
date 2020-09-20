@@ -84,6 +84,7 @@ Written in binary (with colons separating the three parts), the IEEE 754 represe
 [Reference](http://cstl-csm.semo.edu/xzhang/Class%20Folder/CS280/Workbook_HTML/FLOATING_tut.htm)
 
 [How will we convert (25.6875) in decimal to binary?](https://www.quora.com/How-will-we-convert-25-6875-in-decimal-to-binary)
+[Decimal to binary](https://www.quora.com/How-do-you-convert-decimal-numbers-to-binary)
 Note that the mantissa is composed of recurring digits of `0011`. This is **key** to why there is any error to the calculations - 0.1, 0.2 and 0.3 cannot be represented in binary **precisely** in a *finite* number of binary bits any more than 1/9, 1/3 or 1/7 can be represented precisely in *decimal digits*.
 
 Also note that we can decrease the power in the exponent by 52 and shift the point in the binary representation to the right by 52 places (much like 10<sup>-3</sup> * 1.23 == 10<sup>-5</sup> * 123). This then enables us to represent the binary representation as the exact value that it represents in the form a * 2<sup>p</sup>. where 'a' is an integer.
