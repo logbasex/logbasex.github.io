@@ -159,3 +159,6 @@ Most calculators use additional [guard digits](https://en.wikipedia.org/wiki/Gua
 https://programming.guide/java/integer-minvalue-negative-double-minvalue-positive.html
 
 ### https://medium.com/better-programming/why-is-0-1-0-2-not-equal-to-0-3-in-most-programming-languages-99432310d476
+
+https://math.stackexchange.com/questions/1791562/converting-0-1-to-binary-64-bit-double
+https://ryanstutorials.net/binary-tutorial/binary-floating-point.php
