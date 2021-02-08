@@ -59,7 +59,7 @@
   1. Như đã nói ở trước thì mỗi distro (distribution) đều có một tập tin `Release` bao gồm binary packages và source packages. 
      > Ngoài ra còn có InRelease[10] nữa.
      > 
-     Tập tin`Release` bao gồm mã băm (hash/checksum) MD5Sum của tập tin Packages.gz (trong này bao gồm  các mã băm MD5 của các package khác nữa) sẽ được ký(signed). Chữ ký (signature) này đánh dấu đây là một nguồn đáng tin cậy.
+     Tập tin`Release` bao gồm mã băm (hash/checksum) MD5Sum của tập tin Packages.gz (trong này bao gồm  các mã băm MD5Sum của các package khác nữa) sẽ được ký(signed). Chữ ký (signature) này đánh dấu đây là một nguồn đáng tin cậy.
      > Thực ra thì tập tin `Release` hỗ trợ nhiều loại mã hóa ví dụ như bao gồm mã băm MD5Sum/SHA1/SHA256. Nhưng trong bài này mình sẽ dùng SHA256 nhé.
      > 
   2. Sau đó, signed `Release` file sẽ được tải xuống bởi command `apt update` và được lưu chung với tập tin Package.gz
@@ -67,7 +67,7 @@
      > 
   3. Khi một package sắp được cài đặt, đầu tiên là package sẽ được tải xuống, sau đó mã băm `MD5Sum` được tạo ra. 
   4. Tiếp theo thì tập tin `Release` đã được ký (signed Release) đó sẽ được kiểm tra về tính xác thực (Authenticity), nếu bước này thành công chúng ta sẽ có được mã băm `MD5Sum` của tập tin `Packages.gz`
-  cũng như là tập tin đã tải xuống trước đó.
+  cũng như là package đã tải xuống trước đó.
   5. Nếu mã băm ở step 3 và 4 giống nhau thì package sẽ được cài đặt, còn không thì hệ thống sẽ ném ra cảnh báo, vậy thôi. Và tất nhiên là package đã được tải xuống rồi, dù bị cảnh báo bạn vẫn có thể cài đặt nếu bạn muốn nhưng sẽ đi kèm với rửi ro.
   
         > Vẫn còn một số vấn đề khái niệm đến apt-key, apt-secure, gpg... mình lười đưa vào quá, bạn có thể tìm hiểu thêm ở bên ngoài để hiểu rõ hơn. 
@@ -125,7 +125,7 @@
      > curl -O http://vn.archive.ubuntu.com/ubuntu/dists/focal-updates/main/source/Sources.gz
   4. Xác thực chữ ký (signature)
      
-     Nói qua một chút, GPG là một phần mềm mã hóa không đối xúng sử dụng public key để mã hóa và dùng private key để giải mã. 
+     Nói qua một chút, GPG là một phần mềm mã hóa không đối xứng sử dụng public key để mã hóa và dùng private key để giải mã. 
      > gpg --verify vn.archive.ubuntu.com_ubuntu_dists_focal-updates_InRelease
      
       Nếu xảy ra lỗi như thế này
@@ -144,7 +144,7 @@
      Tạo mã băm SHA256 của tập tin đã tải xuống bằng câu lệnh
      > sha256sum Sources.gz
      
-     Và của tập tin Release
+     Và kiểm tra mã băm SHA256 của tập tin Release
      > grep main/source/Sources.gz vn.archive.ubuntu.com_ubuntu_dists_focal-updates_InRelease
      
      Mình thử và thấy ra cùng một kết quả:
