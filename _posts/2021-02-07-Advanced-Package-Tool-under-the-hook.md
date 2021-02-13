@@ -2,9 +2,12 @@
 
 1. Một số khái niệm cơ bản
  - Nếu bạn từng dành thời gian dùng Window, thì có thể bạn đã quen với việc mỗi lần muốn có một phần mềm nào mới trên máy tính thì bạn sẽ tìm kiếm trên internet file installer (thường là `.exe`) để tải về và cài đặt, hoặc là cài đặt từ CDs, DVDs, USBs... Tuy nhiên trên những hệ điều hành mã nguồn mở như Ubuntu, GNU/Linux... các tập tin cài đặt trôi nổi như thế  không nhiều. Với Ubuntu thì hầu hết phần mềm được đóng gói dưới dạng `.deb` (tương tự `.exe` ở Window) gọi là `package` và **Ubuntu Repository là tập hợp của những server lưu trữ các `package` đó**.  Bạn hãy tưởng tượng nó giống như **App Store/CH Play** trên điện thoại, đó là nơi lưu trữ tập trung của rất nhiều phần mềm, giúp cho end-users/distributors có thể cài đặt hay cập nhật phần mềm theo một cách nhất quán (centralized way), thế cho nó dễ. 
- Rồi thì cài đặt phần mềm như thế nào? Tải file `.deb` về rồi install bằng tay thì cực quá, mà [Larry Wall](http://threevirtues.com/) đã dặn dò rằng lười biếng mới là đức tính tốt của lập trình viên, thế nên năm 1998, `APT` (**A**dvanced **P**ackage **T**ool) software chính thức ra đời. `APT` là package manager ban đầu được design cho `Debian` (`Ubuntu` là một distro hard-forked từ `Debian` nên vẫn dùng `APT` làm package manager) mục đích chính thì để đơn giản hóa quá trình cài cắm, cập nhật packages/depedencies thôi. `APT` có thể được sử dụng qua những câu lệnh như`apt*` (apt-get, apt-cache..) hoặc nếu ai không thích dùng qua CLI thì có thể dùng GUI cho nó trực quan và dễ hiểu tỉ như `Ubuntu Software Center `...
+ Rồi thì cài đặt phần mềm như thế nào? Tải file `.deb` về rồi install bằng tay thì cực quá, mà [Larry Wall](http://threevirtues.com/) đã dặn dò rằng lười biếng mới là đức tính tốt của lập trình viên, thế nên năm 1998, `APT` (**A**dvanced **P**ackage **T**ool) software chính thức ra đời. `APT` là package manager ban đầu được design cho `Debian` (`Ubuntu` là một distro hard-forked từ `Debian` nên vẫn dùng `APT` làm package manager) mục đích chính thì để đơn giản hóa quá trình cài cắm, cập nhật `packages/depedencies` thôi. `APT` có thể được sử dụng qua những câu lệnh như`apt*` (apt-get, apt-cache..) hoặc nếu ai không thích dùng qua CLI thì có thể dùng GUI cho nó trực quan và dễ hiểu tỉ như `Ubuntu Software Center `...
    > Ngoài APT thì còn có một số package manager khác như Snap, Synaptic, aptitude...
    > 
+   > Kiểm tra đepencies của package 
+   >> apt depends cowsay (Trước Ubuntu 16.04 chúng ta dùng apt-cache)
+   >>> apt is a higher level collection of the most used commands of apt-get and apt-cache
     
 - Liên quan đến Ubuntu Repository chúng ta có một khái niệm gọi là mirror server. Nói chung thì `Ubuntu` được phân phối (distributed/mirrored) trên rất nhiều servers, và mục đích của việc này là để tải về cho nó nhanh, ví dụ như gửi một request từ Việt Nam sang Lào thì sẽ nhanh hơn sang Singapore vậy đó, tiếp nữa là để giảm tải cho con server chính, thế cho nó nhẹ :satisfied:. Mà mirror thì có hai loại, `primary` hoặc là `secondary`. Loại `primary` nghe bảo băng thông khá tốt, up 24/7 tại địa chỉ `<contry-code>.archive.ubuntu.com` (Ex: [vn.archive.ubuntu.com](http://vn.archive.ubuntu.com/)). Còn loại `secondary` mình cũng không rõ lắm và có vẻ như không phổ biến. Thường thì trong quá trình cài đặt Ubuntu đã setup sẵn mirror xịn xò cho chúng ta luôn rồi, nhưng vốn dĩ là một hệ điều hành dễ tính, bạn có thể thay đổi mirror thủ công hoặc thông qua command như `apt-select`...
   > Danh sách những repository lưu trữ package nằm ở:
@@ -19,7 +22,6 @@
   
   Đầu tiên là phải cập nhật cái đã, hì :smiley:
   > sudo apt update
-  >>(Từ phiên bản 16.04 apt dùng thay thế cho apt-get)
   
   Việc cập nhật này tải xuống thông tin trạng thái (state information) của những package mới nhất từ repo và lưu hết chúng ở đây. (Nếu không cập nhật thì khi chúng ta cài đặt sẽ chỉ cài bản cũ thôi, chú ý nhe')
   > /var/lib/apt/lists
