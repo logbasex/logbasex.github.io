@@ -79,7 +79,7 @@
   1. Đầu tiên bao giờ cũng thế, cập nhật hệ thống cái đã
      > sudo apt update
   
-      ```bash
+      ```shell
       Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
       Get:2 https://dl.yarnpkg.com/debian stable InRelease [17.1 kB]                                                                                                                            
       Hit:3 https://cli.github.com/packages focal InRelease                                                                                                                                     
@@ -131,7 +131,7 @@
      > gpg --verify vn.archive.ubuntu.com_ubuntu_dists_focal-updates_InRelease
      
       Nếu xảy ra lỗi như thế này
-     ```bash 
+     ```shell 
       gpg: Signature made Sat 06 Feb 2021 11:08:29 PM +07
       gpg:                using RSA key 871920D1991BC93C
       gpg: Can't check signature: No public key
@@ -156,7 +156,7 @@
      
      Đầu tiên mình kiểm tra version của package `libpam-modules` trước
      > apt show libpam-modules
-     ```bash
+     ```shell
      Package: libpam-modules
      Version: 1.3.1-5ubuntu4.1
      Priority: required
