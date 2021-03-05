@@ -37,5 +37,12 @@ docker exec <options> <container> <command>
 ## Restore
 
 ```shell
-docker exec -i mongo44 sh -c 'mongorestore --gzip --archive --nsFrom="db_test.*" --nsTo="db_dev.*"' < db.gz
+docker exec -i <mongodb container> /bin/bash -c 'mongorestore --gzip --archive --nsFrom="db_test.*" --nsTo="db_dev.*"' < db.gz
 ```
+
+## Export
+```shell
+sudo docker exec -it mongo44 /bin/bash -c 'mongoexport --host <hostname:port> --db <database-name> --collection <collection-name> --fields <field-name> --type <type/csv/gzip> --noHeaderLine' --query <query> > fields.csv
+```
+
+For further reading: https://docs.mongodb.com/database-tools/
