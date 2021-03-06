@@ -1,11 +1,16 @@
 ---
-title: 'aria2 linux'
+title: 'Download url with aria2'
 date: 2021-03-04
 permalink: /posts/2021/03/aria2-linux/
 tags:
 - linux
 - aria2
 ---
+
+## Prerequisites
+
+- aria2
+- POSIX shells such as `bash`, `zsh`.. and CLI.
 
 ## Introduction
 
@@ -17,7 +22,7 @@ Today, I was given a task to download a list of a lot of URL store in the CSV fi
 |eminem.jpg   |https://i.pinimg.com/474x/19/63/da/1963daa666a8030047e2a9f13beb6975.jpg|
 |cristiano-ronaldo.jpg|https://files.thehandbook.com/uploads/2019/03/ronaldo.jpg|
 
-My task requirement is, in each row, I have to download the file from the given `URL` and save it with the corresponding name on the left side. This is such an interesting task, as you can see if you do it manually with a series of repeated actions include enter, copy and paste, you even can't estimate how long does it take to finish a long list of URLs, and thus the idea is using the automation tool in order to address the tedious one. Ok, let's get started.
+My task requirement is, in each row, I have to download file from the given `URL` and save it with the corresponding name on the left side. This is such an interesting task, as you can see if you do it manually with a series of repeated actions include enter, copy and paste, you even can't estimate how long does it take to finish a long list of URLs, and thus the idea is using the automation tool in order to address the tedious one. Ok, let's get started.
     
 ## Tooling
 
