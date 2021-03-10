@@ -13,7 +13,7 @@ We will use [personal access token](https://docs.gitlab.com/ee/api/README.html#p
 ## Usage
 
 ```shell
-for repo in $(curl -H "PRIVATE-TOKEN: <ACCESS-TOKEN>" "http://<HOST-NAME>/api/v4/projects" | jq '.[].ssh_url_to_repo' | tr -d '"'); do git clone $repo; done;
+for repo in $(curl -H "PRIVATE-TOKEN: <ACCESS-TOKEN>" "http://<HOST-NAME>/api/v4/projects?membership=true&page=1&per_page=100" | jq '.[].ssh_url_to_repo' | tr -d '"'); do git clone $repo; done;
 ```
 
 There is another tool is `Glab`
