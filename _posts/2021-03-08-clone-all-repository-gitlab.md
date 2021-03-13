@@ -24,7 +24,7 @@ There is another tool is `Glab`
 
 ## Usage
 
-```shell script
+```shell
 curl -s -H "Authorization: token <ACCESS-TOKEN>" "https://api.github.com/users/<USER-NAME>/repos?per_page=100" | jq -r '.[].ssh_url' | xargs -L1 git clone
 ```
 -----------------------------------
