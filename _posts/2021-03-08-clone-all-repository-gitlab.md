@@ -17,6 +17,16 @@ for repo in $(curl -H "PRIVATE-TOKEN: <ACCESS-TOKEN>" "http://<HOST-NAME>/api/v4
 ```
 
 There is another tool is `Glab`
+
+## Github APIs
+
+[Get user repositories APIs](https://docs.github.com/en/rest/reference/repos#list-repositories-for-a-user)
+
+## Usage
+
+```shell script
+curl -s -H "Authorization: token <ACCESS-TOKEN>" "https://api.github.com/users/<USER-NAME>/repos?per_page=100" | jq -r '.[].ssh_url' | xargs -L1 git clone
+```
 -----------------------------------
 
 Thank for reading :blush:.
