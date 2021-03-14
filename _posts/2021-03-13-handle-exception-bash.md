@@ -7,9 +7,9 @@ tags:
 - linux
 ---
 
-## Introduction
+## Giới thiệu
 
-Trong các ngôn ngữ lập trình bậc cao phổ biến như Java khi có exception xảy ra chúng ta thường có hai cách giải quyết đó là dừng chương trình bằng việc ném ra ngoại lệ sử dụng `throw/throws` keyword hoặc bắt ngoại lệ để chương trình bỏ qua ngoại lệ đó và chạy tiếp bằng cách sử dụng `try/catch` block.
+Trong các ngôn ngữ lập trình bậc cao phổ biến như Java khi có exception xảy ra chúng ta thường có hai cách giải quyết đó là dừng chương trình bằng việc ném ra ngoại lệ sử dụng `throw/throws` keyword hoặc bắt ngoại lệ để chương trình có thể tiếp tục thực thi bằng cách sử dụng `try/catch` block.
 
 ## Môi trường
 
@@ -17,14 +17,8 @@ Trong các ngôn ngữ lập trình bậc cao phổ biến như Java khi có exc
 
 ## Kiến thức cơ bản 
 
-- Terminal là môi trường cho phép nhận `input` (text) từ bàn phím..., gửi `input` (command) đến `shell` và nhận `output` trả về từ `shell`.
-- Shell vừa là một trình thông dịch (`command line interpreter`) giúp bạn thực thi câu lệnh mà người dùng gửi đến thông qua `terminal/terminal-emulator`, vừa là một ngôn ngữ lập trình. Nếu như với Java, chúng ta sử dụng file với đuôi `.java` thì với shell, mà trong phạm vi bài viết này là `bash` (`Bourne-Again SHell`), chúng ta sử dụng file với đuôi `.sh` (stand for shell) hay còn được gọi là `bash script`.
-
-- Pipeline là một chuỗi của một hoặc nhiều câu lệnh được phân cách bằng kí tự `|` hay `|&`. Ví dụ:
-    ```shell
-     ls $PWD | grep logbasex.sh
-    ```
-  Đây là một `pipeline` cơ bản có thể được hiểu như sau: Liệt kê các tập tin trong thư mục hiện tại rồi tìm kiếm những tập tin có tên là `logbasex.sh` và hiển thị kết quả ra màn hình, tức là `output` của câu lệnh thứ nhất `ls $PWD` được sử dụng làm `input` của câu lệnh thứ hai `grep logbasex.sh`.
+- `Terminal` là môi trường cho phép nhận `input` (text) từ bàn phím..., gửi `input` (command) đến `shell` và nhận `output` trả về từ `shell`.
+- `Shell` vừa là một trình thông dịch (`command line interpreter`) giúp bạn thực thi câu lệnh mà người dùng gửi đến thông qua `terminal/terminal-emulator`, vừa là một ngôn ngữ lập trình. Nếu như với Java, chúng ta sử dụng file với đuôi `.java` thì với shell, mà trong phạm vi bài viết này là `bash` (`Bourne-Again SHell`), chúng ta sử dụng file với đuôi `.sh` (stand for shell) hay còn được gọi là `bash script`.
 
 - Mỗi lần bạn gõ câu lệnh trên terminal và nhấn phím `Enter`, `bash` sẽ thực thi câu lệnh đó và trả về một `exit status` hay còn được gọi là `return code`, là một số nguyên nằm trong khoảng [0,255]. Theo quy ước thì khi một câu lệnh thực thi thành công sẽ trả về `0 exit status`, còn nếu có lỗi xảy ra thì [`non-zero exit status`](https://tldp.org/LDP/abs/html/exitcodes.html) sẽ được trả về tỉ như `command not found` là `127`. Chúng ta có một biến đặc biệt lưu trữ `exit status` của câu lệnh đã được thực thi trước đó, và để kiểm tra bạn có thể làm như sau: 
 
@@ -43,8 +37,36 @@ Trong các ngôn ngữ lập trình bậc cao phổ biến như Java khi có exc
       ls: cannot access 'logbasex': No such file or directory
       2  
       ```
-  
-## Tạo   
+- `File Descriptor` là một số nguyên dương đại diện cho một tập tin đang được mở trong một process. Một `terminal emulator` có 3 file descriptors mặc định đó là `stdin` ,`stdout`, `stderr`. 
+    ```shell
+        ls -la /proc/$$/fd
+    ```
+  Output
+    ```shell
+    total 0
+    dr-x------ 2 logbasex logbasex  0 Thg 3  14 07:06 .
+    dr-xr-xr-x 9 logbasex logbasex  0 Thg 3  14 07:06 ..
+    lrwx------ 1 logbasex logbasex 64 Thg 3  14 07:06 0 -> /dev/pts/5
+    lrwx------ 1 logbasex logbasex 64 Thg 3  14 07:06 1 -> /dev/pts/5
+    lrwx------ 1 logbasex logbasex 64 Thg 3  14 07:06 2 -> /dev/pts/5
+    lrwx------ 1 logbasex logbasex 64 Thg 3  14 08:35 255 -> /dev/pts/5
+    ```
+    - [stdin](https://en.wikipedia.org/wiki/File_descriptor): Standard Input (File descriptor 0)
+    - [stdout](https://en.wikipedia.org/wiki/File_descriptor): Standard Output (File descriptor 1)
+    - [stderr](https://en.wikipedia.org/wiki/File_descriptor): Standard Error (File descriptor 2)   
+- `Pipeline` là một chuỗi của 2 hay nhiều câu lệnh được phân cách bằng kí tự `|` hoặc `|&` cho phép chúng ta truyền dữ liệu từ process này sang process kia mà [không cần lưu dữ liệu trực tiếp lên   ổ cứng](https://stackoverflow.com/questions/18053647/does-writing-data-to-stdout-in-linux-occupy-disk-space). Trong đó`|` pipes redirect `STDOUT` của process này sang `STDIN` của process kia còn `|&` redirect cả `STDOUT` và`STDERR` Ví dụ:
+    ```shell
+     ls $PWD | grep logbasex.sh
+    ```
+  Đây là một `pipeline` cơ bản có thể được hiểu như sau: Liệt kê các tập tin trong thư mục hiện tại rồi tìm kiếm những tập tin có tên là `logbasex.sh` và hiển thị kết quả ra màn hình, tức là `output` (`STDOUT`) của câu lệnh thứ nhất `ls $PWD` được sử dụng làm `input`(`STDIN`) của câu lệnh thứ hai `grep logbasex.sh`.
+
+
+- **Ở đây mình chỉ giới thiệu qua các khái niệm cơ bản đủ để hiểu được nội dung bài viết. Mọi người chủ động tìm hiểu thêm nếu có hứng thú nhé.**
+<p align="center">
+  <img src="/images/1024-file-descriptors-ought-to-be-enough-for-anybody.jpg"  alt=""/>
+</p>
+
+## Tạo bug
 
 1. Để xử lý ngoại lệ thì đầu tiên phải có chương trình ném ra ngoại lệ trước đã. Mình tạo một file có tên `error.sh` với nội dung như sau:
     ```shell
@@ -67,7 +89,7 @@ Trong các ngôn ngữ lập trình bậc cao phổ biến như Java khi có exc
 
 ## Xử lý ngoại lệ    
 
-#####I. Trường hợp cơ bản
+### I. Trường hợp cơ bản
  
  Như đã thấy ở trên, cả 3 câu lệnh đều thực thi không thành công, chương trình kết thúc và chúng ta có 3 dòng báo lỗi hiển thị trên màn hình. Ok. Nhưng bây giờ nếu bạn muốn chương trình kết thúc ngay tại dòng lệnh đầu tiên mà thực thi không thành công thì làm thế nào? 
 
@@ -102,7 +124,7 @@ Thật may mắn là `bash` có hỗ trợ một `built-in command` gọi là [`
     ls: cannot access 'logbasex': No such file or directory
     ```
 
-#####II. Ngoại lệ của `set -e` option (any command in a pipeline but the last)
+### II. Ngoại lệ của `set -e` option (any command in a pipeline but the last)
 
 1. Chúng ta tạo một script mới có tên `error-pipeline.sh` với nội dung như sau
     ```shell
@@ -165,11 +187,10 @@ bash error-pipefail.sh 2> /dev/null
 > Mình sẽ giải thích câu lệnh trên ở một bài viết khác. 
 >
 
-<img src="https://scontent.fhan2-2.fna.fbcdn.net/v/t1.15752-9/125003262_384355616013956_4487572154473805643_n.png?_nc_cat=111&ccb=1-3&_nc_sid=ae9488&_nc_ohc=pX646gM2rC0AX-UtaN4&_nc_ht=scontent.fhan2-2.fna&oh=07812ea30a5a71aa61c2617cec0e04dc&oe=6073268F" height="250" alt="">
-
-<img src="https://scontent.fhan2-2.fna.fbcdn.net/v/t1.15752-9/s2048x2048/125071701_1275620466146677_5307808787183155159_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=ae9488&_nc_ohc=E0gQ-iQ88QcAX-M00DV&_nc_ht=scontent.fhan2-2.fna&tp=7&oh=776c03d3062d26c90667937bae073f9f&oe=604D9940" height="250" alt="">
-
-#####III. Bỏ qua ngoại lệ
+<p align="center">
+    <img src="https://scontent.fhan2-2.fna.fbcdn.net/v/t1.15752-9/s2048x2048/125071701_1275620466146677_5307808787183155159_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=ae9488&_nc_ohc=E0gQ-iQ88QcAX-M00DV&_nc_ht=scontent.fhan2-2.fna&tp=7&oh=776c03d3062d26c90667937bae073f9f&oe=604D9940" alt="">
+</p>
+### II. Bỏ qua ngoại lệ
 Trước giờ chúng ta chỉ nói đến vấn đề ném ra ngoại lệ, nhưng bây giờ chúng ta muốn chương trình vẫn tiếp tục thực thi khi bắt gặp ngoại lệ thì làm thế nào? 
 
 Thú thật thì chả biết làm thế nào ngoài sử dụng toán tử `OR` cả. Toán tử này trong `bash script` được biểu diễn dưới kí tự `||` (double pipe) và cách dùng cũng tương tự như trong Java, có hỗ trợ [short-circuit](https://www.geeksforgeeks.org/short-circuiting-in-java-with-examples).
@@ -192,12 +213,14 @@ Thú thật thì chả biết làm thế nào ngoài sử dụng toán tử `OR`
     good morning
     ```
 
-#####IV. Xử lí hậu kì
-Giả sử trong quá trình thực thi một script bất kì, bạn tạo ra vô số tập tin tạm thời (temporary files) trên hệ thống và bạn định sẽ xóa hết chúng ở cuối script. Nhưng điều gì sẽ xảy ra nếu có một ngoại lệ được ném ra và script của bạn thực thi không thành công? Chả có gì xảy ra cho đến khi cái này xuất hiện cả
+### IV. Xử lí hậu kì
+Giả sử trong quá trình thực thi một script bất kì, bạn tạo ra vô số tập tin tạm thời (temporary files) trên hệ thống và bạn định sẽ xóa hết chúng ở cuối script. Nhưng điều gì sẽ xảy ra nếu có một ngoại lệ được ném ra và script của bạn thực thi không thành công? Nhiều khả năng là không có gì cho đến một ngày đẹp trời nào đó :)
 
-![](https://i.stack.imgur.com/CG8Uz.png)
+<p align="center">
+  <img src="https://i.stack.imgur.com/CG8Uz.png"  alt=""/>
+</p>
 
-Đến đây không hẳn là hết cách, tuy nhiên thì bây giờ nếu bạn quyết định dọn dẹp hệ thống thì dọn dẹp cái gì bây giờ, nói chung về cơ bản là khá mất thời gian và cách tốt nhất là khi xảy ra ngoại lệ thì chúng ta sẽ xóa hết những tập tin đã tạo ra trong quá trình chạy script.
+Đến đây không hẳn là hết cách, tuy nhiên thì bây giờ nếu bạn quyết định dọn dẹp hệ thống thì dọn dẹp cái gì bây giờ, nói chung về cơ bản là khá mất thời gian và cách tốt nhất là khi ngoại lệ xảy ra thì chúng ta cũng đồng thời xóa hết những tập tin đã tạo ra trong quá trình chạy script.
 
 Vẫn may mắn như thường lệ là `bash` có hỗ trợ câu lệnh `trap` giúp chúng ta làm việc đó.
 
@@ -258,6 +281,20 @@ TMP=$(tempfile)
 trap 'rm -f $TMP' ERR
 trap 'echo $TMP' ERR
 ```
+
+
+Thanks for the following precious resources
+
+1. https://stackoverflow.com/questions/25378845/what-does-set-o-errtrace-do-in-a-shell-script
+2. https://www.baeldung.com/linux/creating-temp-file
+3. https://www.shell-tips.com/bash/functions/
+4. https://linuxhint.com/bash_error_handling/
+5. https://linuxhint.com/bash_pipe_tutorial/
+6. https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425 
+7. https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+
+
+
 
 -----------------------------------
 
