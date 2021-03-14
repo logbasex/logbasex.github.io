@@ -60,10 +60,15 @@ Trong các ngôn ngữ lập trình bậc cao phổ biến như Java khi có exc
     ```
   Đây là một `pipeline` cơ bản có thể được hiểu như sau: Liệt kê các tập tin trong thư mục hiện tại rồi tìm kiếm những tập tin có tên là `logbasex.sh` và hiển thị kết quả ra màn hình, tức là `output` (`STDOUT`) của câu lệnh thứ nhất `ls $PWD` được sử dụng làm `input`(`STDIN`) của câu lệnh thứ hai `grep logbasex.sh`.
 
+<iframe width="560" height="315"
+src="http://www.youtube.com/embed/bKzonnwoR2I" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
 
 - **Ở đây mình chỉ giới thiệu qua các khái niệm cơ bản đủ để hiểu được nội dung bài viết. Mọi người chủ động tìm hiểu thêm nếu có hứng thú nhé.**
 <p align="center">
-  <img src="/images/1024-file-descriptors-ought-to-be-enough-for-anybody.jpg"  alt=""/>
+  <img src="https://s3-ap-southeast-1.amazonaws.com/logbasex.github.io/1024-file-descriptors-ought-to-be-enough-for-anybody.jpg"  alt=""/>
 </p>
 
 ## Tạo bug
@@ -188,7 +193,7 @@ bash error-pipefail.sh 2> /dev/null
 >
 
 <p align="center">
-    <img src="https://scontent.fhan2-2.fna.fbcdn.net/v/t1.15752-9/s2048x2048/125071701_1275620466146677_5307808787183155159_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=ae9488&_nc_ohc=E0gQ-iQ88QcAX-M00DV&_nc_ht=scontent.fhan2-2.fna&tp=7&oh=776c03d3062d26c90667937bae073f9f&oe=604D9940" alt="">
+    <img src="https://s3-ap-southeast-1.amazonaws.com/logbasex.github.io/cat-your-opinion.jpg" alt="">
 </p>
 ### II. Bỏ qua ngoại lệ
 Trước giờ chúng ta chỉ nói đến vấn đề ném ra ngoại lệ, nhưng bây giờ chúng ta muốn chương trình vẫn tiếp tục thực thi khi bắt gặp ngoại lệ thì làm thế nào? 
