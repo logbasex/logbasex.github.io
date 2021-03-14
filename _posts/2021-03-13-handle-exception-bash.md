@@ -60,11 +60,23 @@ Trong các ngôn ngữ lập trình bậc cao phổ biến như Java khi có exc
     ```
   Đây là một `pipeline` cơ bản có thể được hiểu như sau: Liệt kê các tập tin trong thư mục hiện tại rồi tìm kiếm những tập tin có tên là `logbasex.sh` và hiển thị kết quả ra màn hình, tức là `output` (`STDOUT`) của câu lệnh thứ nhất `ls $PWD` được sử dụng làm `input`(`STDIN`) của câu lệnh thứ hai `grep logbasex.sh`.
 
-<iframe width="560" height="315"
-src="http://www.youtube.com/embed/bKzonnwoR2I" 
+<!---
+<iframe width="560" height="315" align="center" src="http://www.youtube.com/embed/bKzonnwoR2I" 
 frameborder="0" 
 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
 allowfullscreen></iframe>
+-->
+
+<!---https://stackoverflow.com/a/43691451/10393067-->
+<style>
+img[src*='#center'] { 
+    display: block;
+    margin: auto;
+}
+</style>
+
+[![](http://img.youtube.com/vi/bKzonnwoR2I/0.jpg#center)](http://www.youtube.com/watch?v=bKzonnwoR2I "Unix Pipeline (Brian Kernighan) - Computerphile")
+
 
 - **Ở đây mình chỉ giới thiệu qua các khái niệm cơ bản đủ để hiểu được nội dung bài viết. Mọi người chủ động tìm hiểu thêm nếu có hứng thú nhé.**
 <p align="center">
